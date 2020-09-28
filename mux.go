@@ -136,7 +136,7 @@ func copyRouteRegexp(r *routeRegexp) *routeRegexp {
 // field of the match argument.
 func (r *Router) Match(req *http.Request, match *RouteMatch) bool {
 	for _, route := range r.routes {
-		log.Printf("%v", route.name)
+		log.Printf("route nameroutes: %v", route.namedRoutes)
 		if route.Match(req, match) {
 			// Build middleware chain if no error was found
 			if match.MatchErr == nil {
