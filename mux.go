@@ -135,8 +135,8 @@ func copyRouteRegexp(r *routeRegexp) *routeRegexp {
 // (eg: not found) has a registered handler, the handler is assigned to the Handler
 // field of the match argument.
 func (r *Router) Match(req *http.Request, match *RouteMatch) bool {
+	var ok = false
 	for _, route := range r.routes {
-		log.Printf("route nameroutes: %v", route.namedRoutes)
 		if route.Match(req, match) {
 			// Build middleware chain if no error was found
 			if match.MatchErr == nil {
@@ -144,6 +144,8 @@ func (r *Router) Match(req *http.Request, match *RouteMatch) bool {
 					match.Handler = r.middlewares[i].Middleware(match.Handler)
 				}
 			}
+			ok = true
+			log.Printf("route match: %v", ok)
 			return true
 		}
 	}
