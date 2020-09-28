@@ -201,7 +201,7 @@ func (r *Router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 		req = requestWithRoute(req, match.Route)
 	}
 
-	log.Printf("%v", handler)
+	log.Printf("handler: %v", handler)
 
 	if handler == nil && match.MatchErr == ErrMethodMismatch {
 		handler = methodNotAllowedHandler()
