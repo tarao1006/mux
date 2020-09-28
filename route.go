@@ -68,15 +68,14 @@ func (r *Route) Match(req *http.Request, match *RouteMatch) bool {
 			}
 
 			matchErr = nil
-			log.Printf("matched: %v", matched)
-			log.Printf("match err: %v", match.MatchErr)
+			log.Printf("matched %v: match err: %v", matched, match.MatchErr)
 			return matched
 		}
 	}
 
 	if matchErr != nil {
 		match.MatchErr = matchErr
-		log.Printf("matched %v", matched)
+		log.Printf("matched %v: match err: %v", matched, match.MatchErr)
 		return matched
 	}
 
