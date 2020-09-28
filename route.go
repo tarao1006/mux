@@ -96,6 +96,7 @@ func (r *Route) Match(req *http.Request, match *RouteMatch) bool {
 	// Set variables.
 	r.regexp.setMatch(req, match, r)
 
+	log.Printf("route name: %v", r.name)
 	log.Printf("match %v", match)
 	return true
 }
