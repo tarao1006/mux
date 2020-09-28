@@ -7,6 +7,7 @@ package mux
 import (
 	"bytes"
 	"fmt"
+	"log"
 	"net/http"
 	"net/url"
 	"regexp"
@@ -190,6 +191,8 @@ func (r *routeRegexp) Match(req *http.Request, match *RouteMatch) bool {
 	if r.options.useEncodedPath {
 		path = req.URL.EscapedPath()
 	}
+	matched := r.regexp.MatchString(path)
+	log.Printf("regex matched: %v", matched)
 	return r.regexp.MatchString(path)
 }
 
