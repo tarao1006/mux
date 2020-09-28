@@ -135,6 +135,7 @@ func copyRouteRegexp(r *routeRegexp) *routeRegexp {
 // field of the match argument.
 func (r *Router) Match(req *http.Request, match *RouteMatch) bool {
 	for _, route := range r.routes {
+		fmt.Printf("%v", route)
 		if route.Match(req, match) {
 			// Build middleware chain if no error was found
 			if match.MatchErr == nil {
@@ -198,6 +199,8 @@ func (r *Router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 		req = requestWithVars(req, match.Vars)
 		req = requestWithRoute(req, match.Route)
 	}
+
+	fmt.Printf("%v", req)
 
 	if handler == nil && match.MatchErr == ErrMethodMismatch {
 		handler = methodNotAllowedHandler()
