@@ -192,7 +192,7 @@ func (r *routeRegexp) Match(req *http.Request, match *RouteMatch) bool {
 		path = req.URL.EscapedPath()
 	}
 	matched := r.regexp.MatchString(path)
-	log.Printf("regex matched: %v", matched)
+	log.Printf("regex matched: %v: regexp: %v", matched, r.regexp)
 	return r.regexp.MatchString(path)
 }
 
