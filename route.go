@@ -40,8 +40,10 @@ func (r *Route) SkipClean() bool {
 
 // Match matches the route against the request.
 func (r *Route) Match(req *http.Request, match *RouteMatch) bool {
+	var matched = false
 	if r.buildOnly || r.err != nil {
-		return false
+		log.Printf("matched %v", matched)
+		return matched
 	}
 
 	var matchErr error
@@ -66,13 +68,15 @@ func (r *Route) Match(req *http.Request, match *RouteMatch) bool {
 			}
 
 			matchErr = nil
-			return false
+			log.Printf("matched %v", matched)
+			return matched
 		}
 	}
 
 	if matchErr != nil {
 		match.MatchErr = matchErr
-		return false
+		log.Printf("matched %v", matched)
+		return matched
 	}
 
 	if match.MatchErr == ErrMethodMismatch && r.handler != nil {
@@ -96,9 +100,10 @@ func (r *Route) Match(req *http.Request, match *RouteMatch) bool {
 	// Set variables.
 	r.regexp.setMatch(req, match, r)
 
-	log.Printf("route name: %v", r.name)
+	matched = true
+	log.Printf("matched %v", matched)
 	log.Printf("match %v", match)
-	return true
+	return matched
 }
 
 // ----------------------------------------------------------------------------
@@ -373,7 +378,7 @@ func (r *Route) Path(tpl string) *Route {
 // with a PathPrefix matcher.
 func (r *Route) PathPrefix(tpl string) *Route {
 	r.err = r.addRegexpMatcher(tpl, regexpTypePrefix)
-	log.Printf("path: route matchers: %v", r.matchers)
+	log.Printf("path prefix: route matchers: %v", r.matchers)
 	return r
 }
 
