@@ -356,6 +356,7 @@ func (r *Route) Methods(methods ...string) *Route {
 // calling mux.Vars(request).
 func (r *Route) Path(tpl string) *Route {
 	r.err = r.addRegexpMatcher(tpl, regexpTypePath)
+	log.Printf("route error: %v", r.err)
 	return r
 }
 
