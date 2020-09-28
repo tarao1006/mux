@@ -357,6 +357,7 @@ func (r *Route) Methods(methods ...string) *Route {
 func (r *Route) Path(tpl string) *Route {
 	r.err = r.addRegexpMatcher(tpl, regexpTypePath)
 	log.Printf("route error: %v", r.err)
+	log.Printf("route matchers: %v", r.matchers)
 	return r
 }
 
