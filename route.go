@@ -356,8 +356,7 @@ func (r *Route) Methods(methods ...string) *Route {
 // calling mux.Vars(request).
 func (r *Route) Path(tpl string) *Route {
 	r.err = r.addRegexpMatcher(tpl, regexpTypePath)
-	log.Printf("route error: %v", r.err)
-	log.Printf("route matchers: %v", r.matchers)
+	log.Printf("path: route matchers: %v", r.matchers)
 	return r
 }
 
@@ -374,6 +373,7 @@ func (r *Route) Path(tpl string) *Route {
 // with a PathPrefix matcher.
 func (r *Route) PathPrefix(tpl string) *Route {
 	r.err = r.addRegexpMatcher(tpl, regexpTypePrefix)
+	log.Printf("path: route matchers: %v", r.matchers)
 	return r
 }
 
