@@ -203,7 +203,7 @@ func (r *Router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 		req = requestWithRoute(req, match.Route)
 	}
 
-	log.Printf("request: method: %v, url: %v, url.path: %v", req.Method, req.URL, req.URL.Path)
+	log.Printf("request: method: %v, url: %v", req.Method, req.URL)
 	log.Printf("handler: %v", handler)
 
 	if handler == nil && match.MatchErr == ErrMethodMismatch {

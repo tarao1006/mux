@@ -68,7 +68,8 @@ func (r *Route) Match(req *http.Request, match *RouteMatch) bool {
 			}
 
 			matchErr = nil
-			log.Printf("matched %v", matched)
+			log.Printf("matched: %v", matched)
+			log.Printf("match err: %v", match.MatchErr)
 			return matched
 		}
 	}
